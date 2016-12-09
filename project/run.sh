@@ -1,7 +1,7 @@
 #!/bin/bash
 
-find files/wav/ -name "*.wav" > features/scp/arctic_slt.wav.scp
-PATH="$PATH:/home/maimei/Lataukset/project/bin"
+find files/wav/train -name "*.wav" > features/scp/arctic_slt.wav.scp
+PATH="$PATH:/home/maimei/Documents/STUDIES/9.lukukausi/08_Speech_Recognition/Project/Code/project/bin"
 
 # Create simple windows:
 echo "-0.5 0 0.5" | x2x +af > features/delta.win.float
