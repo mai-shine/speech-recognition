@@ -46,10 +46,16 @@ n=5
 test_path=/home/maimei/Documents/STUDIES/9.lukukausi/08_Speech_Recognition/Project/Code/project/files/labels/test/monophone
 #Testing:
 #Generate vocoder parameters for a label
-#HMGenS -T 1 -C config -C generation.conf -H hmm5/macros -H hmm5/hmmdefs \
-#-N hmm5/hmmdefs.dur -M . monophones0 monophones0 $test_path/arctic_b0500.lab
+HMGenS -T 1 -C config -C generation.conf -H monophone/hmm5/macros -H monophone/hmm5/hmmdefs \
+#-N monophone/hmm5/hmmdefs.dur -M test monophone/monophones0 monophone/monophones0 $test_path/arctic_b0500.lab
+-N monophone/hmm5/hmmdefs.dur -M test monophone/monophones0 monophone/monophones0 $test_path/arctic_a0001.lab
 
 #Synthesize speech with params
-excite -p 80 < test/arctic_b0500.f0 | mlsadf -p 80 test/arctic_b0500.mcep > test/data.syn.2
+# to float, reverse log, 
+x2x +aa1 test/f0 | awk '{if ($1>0) {print exp($1)} else {print "0"}}' | \
+x2x +af > test/f0.float
+x2x +af test/mcep > test/mcep.float
+excite -p 80 < test/f0.float | mlsadf -m 25 -p 80 test/mcep.float > test/data.syn.2
 x2x -o +fs test/data.syn.2 > test/data.syn.2.short
 play -e signed-integer -b 16 -t raw -r 16000 test/data.syn.2.short 
+
