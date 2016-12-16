@@ -1,5 +1,5 @@
 RO 0
-LS triphone/stats
+LS triphone/stats.dur
 QS "LL-Vowel"                           {e~*,a~*,aa~*,aa1~*,ar~*,eh~*,ou~*,ou1~*,o~*,oo~*,or~*,ii~*,iy~*,i~*,@r~*,@~*,uh~*,u~*,uu~*,uw~*,ei~*,ei1~*,ai~*,aer~*,oi~*,ow~*,owr~*,i@~*,ir~*,@@r~*,@@r1~*,eir~*,eri1~*,ur~*,ur1~*}
 QS "LL-Consonant"                       {p~*,t~*,t^~*,k~*,b~*,d~*,g~*,ch~*,jh~*,s~*,z~*,sh~*,zh~*,f~*,v~*,th~*,dh~*,h~*,m~*,m!~*,n~*,n!~*,ng~*,l~*,lw~*,l!~*,r~*,y~*,w~*,hw~*}
 QS "LL-Voiced_Consonant"                {t^~*,b~*,d~*,g~*,z~*,zh~*,v~*,dh~*,r~*,y~*,w~*,m~*,m!~*,n~*,n!~*,ng~*,jh~*,l~*,l!~*}

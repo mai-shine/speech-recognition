@@ -31,31 +31,31 @@ lab_path=/home/maimei/Documents/STUDIES/9.lukukausi/08_Speech_Recognition/Projec
 
 # Create tree.hed file 
 # use RO 0 and TB 0
-#./tree.hed.sh
-#perl mkclscript.prl TB 350 triphone/triphones1 >> tree.hed
+./tree.hed.sh
 
 # Tied-state triphones
 # run for acoustic model
 #mkdir triphone/hmm9
-#HHEd -H triphone/hmm8/macros -H triphone/hmm8/hmmdefs -i -p -s -m -a 1.0 -M triphone/hmm9 \
-#tree.hed triphone/triphones1 | tee triphone/log_hmmdefs
+
+HHEd -H triphone/hmm8/macros -H triphone/hmm8/hmmdefs -i -p -s -m -a 1.0 -M triphone/hmm9 \
+tree.hed triphone/triphones1 > triphone/log_hmmdefs
 
 # Create tree.dur.hed
-#./tree.dur.hed.sh
+awk '{print NR "\t" $1 "\t1\t1"}' triphone/triphones1 > triphone/stats.dur
+./tree.dur.hed.sh
 
 # run for duration model
 HHEd -H triphone/hmm8/hmmdefs.dur -i -p -s -m -a 1.0 -M triphone/hmm9 \
-tree.dur.hed triphone/triphones1 | tee triphone/log_hmmdefs.dur
+tree.dur.hed triphone/triphones1 > triphone/log_hmmdefs.dur
 
 # Final re-estimation 
 #mkdir triphone/hmm10
-HERest -C config -L $lab_path -t 250.0 150.0 1000.0 \
--S train.scp -H triphone/hmm9/macros -H triphone/hmm9/hmmdefs -M triphone/hmm10 \
--N triphone/hmm9/hmmdefs.dur -u mvwtdmv -R triphone/hmm8 triphone/triphones1 triphone/triphones1
 
-awk '{print NR "\t" $1 "\t1\t1"}' triphone/triphones1 > triphone/stats.dur
+#HERest -C config -L $lab_path -t 250.0 150.0 1000.0 \
+#-S train.scp -H triphone/hmm8/macros -H triphone/hmm8/hmmdefs -M triphone/hmm9 \
+#-N triphone/hmm8/hmmdefs.dur -u mvwtdmv -R triphone/hmm9 triphone/triphones1 triphone/triphones1
 
 #mkdir triphone/hmm11
-HERest -C config -L $lab_path -t 250.0 150.0 1000.0 -s triphone/stats.dur \
--S train.scp -H triphone/hmm10/macros -H triphone/hmm10/hmmdefs -M triphone/hmm11 \
--N triphone/hmm10/hmmdefs.dur -u mvwtdmv -R triphone/hmm11 triphone/triphones1 triphone/triphones1
+#HERest -C config -L $lab_path -t 250.0 150.0 1000.0 \ #-s triphone/stats.dur \
+#-S train.scp -H triphone/hmm10/macros -H triphone/hmm10/hmmdefs -M triphone/hmm11 \
+#-N triphone/hmm10/hmmdefs.dur -u mvwtdmv -R triphone/hmm11 triphone/triphones1 triphone/triphones1
