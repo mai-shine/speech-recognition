@@ -25,7 +25,6 @@ cat features/scp/arctic_slt.wav.scp | while read line; do
     x2x +sf features/data.2bitInteger > features/data.float
 
     # Extract pitch here with values that suit the speaker and save to data.pitch.raw.float
-    # Add your code here: 
     pitch -a 1 -s 16 -p 80 -L 80 -H 250 features/data.float> features/data.pitch.raw.float
    
     # Handle the magic number:
